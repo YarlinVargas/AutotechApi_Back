@@ -1,0 +1,7 @@
+﻿################################################################################
+# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/AutotechApi/DesignTimeBuild/.dtbcache.v2
+/.vs/AutotechApi/FileContentIndex/166e33e8-3f8f-4a54-b612-85cc21f1eae6.vsidx
+/.vs/AutotechApi/FileContentIndex/read.lock
