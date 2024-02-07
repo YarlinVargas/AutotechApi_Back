@@ -1,6 +1,6 @@
 ﻿namespace AutotechApi.Models
 {
-    public class OrdenTrabajo
+    public class OrdenTrabajoModel
     {
         public int Id_oder_trabajo { get; set; }
         public string description { get; set; }
