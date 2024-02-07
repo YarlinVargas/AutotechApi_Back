@@ -16,7 +16,7 @@ namespace AutotechApi.Data
         {
             using (var sql = new SqlConnection(cn.cadenaSql()))
             {
-                using (var store = new SqlCommand("insertarCliente", sql))
+                using (var store = new SqlCommand("insertarClientes", sql))
                 {
                     store.CommandType = CommandType.StoredProcedure;
                     store.Parameters.AddWithValue("name", client.name);
@@ -35,9 +35,10 @@ namespace AutotechApi.Data
         {
             using (var sql = new SqlConnection(cn.cadenaSql()))
             {
-                using (var store = new SqlCommand("editarClient", sql))
+                using (var store = new SqlCommand("editarClientes", sql))
                 {
                     store.CommandType = CommandType.StoredProcedure;
+                    store.Parameters.AddWithValue("id", client.Id_cliente);
                     store.Parameters.AddWithValue("name", client.name);
                     store.Parameters.AddWithValue("address", client.address);
                     store.Parameters.AddWithValue("telephoneNumber", client.telephoneNumber);
@@ -71,7 +72,7 @@ namespace AutotechApi.Data
 
             using (var sql = new SqlConnection(cn.cadenaSql()))
             {
-                using (var store = new SqlCommand("mostrarClient", sql))
+                using (var store = new SqlCommand("mostrarClientes", sql))
                 {
                     await sql.OpenAsync();
                     store.CommandType = CommandType.StoredProcedure;

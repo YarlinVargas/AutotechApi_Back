@@ -1,6 +1,6 @@
 ﻿namespace AutotechApi.Models
 {
-    public class Reparaciones
+    public class ReparacionesModel
     {
         public int Id_vehiculo { get; set; }
         public string description { get; set; }
