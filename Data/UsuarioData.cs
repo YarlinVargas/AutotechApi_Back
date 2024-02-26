@@ -12,24 +12,37 @@ namespace AutotechApi.Data
         conexionbd cn = new conexionbd();
 
         //Metodo para insertar usuario
-        public async Task InsertarUsuario(UsuarioModel user)
+        public async Task<ReplyLogin> InsertarUsuario(UsuarioModel user)
         {
             using (var sql = new SqlConnection(cn.cadenaSql()))
             {
-                using (var store = new SqlCommand("insertarUsuario", sql))
+                ReplyLogin r = new ReplyLogin();
+                try
                 {
-                    store.CommandType = CommandType.StoredProcedure;
-                    store.Parameters.AddWithValue("name", user.name);
-                    store.Parameters.AddWithValue("birthday", user.birthday);
-                    store.Parameters.AddWithValue("age", user.age);
-                    store.Parameters.AddWithValue("address", user.address);
-                    store.Parameters.AddWithValue("email", user.email);
-                    store.Parameters.AddWithValue("password", user.password);
-                    store.Parameters.AddWithValue("idUserType", user.idusserType);
-                    store.Parameters.AddWithValue("active",user.active);
+                    using (var store = new SqlCommand("insertarUsuario", sql))
+                    {
+                        store.CommandType = CommandType.StoredProcedure;
+                        store.Parameters.AddWithValue("name", user.name);
+                        store.Parameters.AddWithValue("birthday", user.birthday);
+                        store.Parameters.AddWithValue("age", user.age);
+                        store.Parameters.AddWithValue("address", user.address);
+                        store.Parameters.AddWithValue("email", user.email);
+                        store.Parameters.AddWithValue("password", user.password);
+                        store.Parameters.AddWithValue("idUserType", user.idusserType);
+                        store.Parameters.AddWithValue("active", user.active);
 
-                    await sql.OpenAsync();
-                    await store.ExecuteNonQueryAsync();
+                        await sql.OpenAsync();
+                        await store.ExecuteNonQueryAsync();
+                        r.Message = "Usuario Creado con exito";
+                        r.Flag = true;
+                        return r;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    r.Message = "Creacion de usuario invalido";
+                    r.Flag = false;
+                    return r;
                 }
             }
         }
@@ -41,8 +54,9 @@ namespace AutotechApi.Data
                 using (var store = new SqlCommand("editarUsuario", sql))
                 {
                     store.CommandType = CommandType.StoredProcedure;
+                    store.Parameters.AddWithValue("id", user.Id_user);
                     store.Parameters.AddWithValue("name", user.name);
-                    store.Parameters.AddWithValue("birthday", user.birthday);
+                    store.Parameters.AddWithValue("birthday", Convert.ToDateTime(user.birthday).ToString("yyyy-MM-dd")); 
                     store.Parameters.AddWithValue("age", user.age);
                     store.Parameters.AddWithValue("address", user.address);
                     store.Parameters.AddWithValue("email", user.email);
