@@ -1,10 +1,10 @@
 ﻿namespace AutotechApi.Connection
 {
-    public class conexionbd
+    public class Conexionbd
     {
         private string connectionString = string.Empty;
 
-        public conexionbd()
+        public Conexionbd()
         {
             //Sentencia sql para traer los datos de la BD
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
